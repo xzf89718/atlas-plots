@@ -668,6 +668,7 @@ def set_graphics_attributes(obj, **kwargs):
             | https://root.cern.ch/doc/master/classTAttFill.html
             | https://root.cern.ch/doc/master/classTAttMarker.html
             | https://root.cern.ch/doc/master/classTAttText.html
+            | https://root.cern.ch/doc/master/classTAttAxis.html
 
         The kwarg syntax is the same as the equivalent ROOT attribute setter function,
         but in all lower case and without the 'Set' prefix. For example, to set the
@@ -742,7 +743,49 @@ def set_graphics_attributes(obj, **kwargs):
 
         if "textangle" in kwargs:
             obj.SetTextAngle(kwargs["textangle"])
+    
+    # Axis attributes
+    # No SetNdivisions yet
+    # No TickLength and TickSize yet
+    if isinstance(obj, root.TAttAxis):
+        if "axiscolor" in kwargs:
+            obj.SetAxisColor(
+                get_color_code(kwargs["axiscolor"]))
 
+        if "axiscolor" in kwargs and "axisalpha" in kwargs:
+            obj.SetAxisColor(
+                get_color_code(kwargs["axiscolor"]), kwargs["axisalpha"]
+            )
+
+        if "labelcolor" in kwargs:
+            obj.SetLabelColor(get_color_code(kwargs["labelcolor"]))
+
+        if "labelcolor" in kwargs and "labelalpha" in kwargs:
+            obj.SetAxisColor(
+                get_color_code(kwargs["labelcolor"]), kwargs["labelalpha"]
+            )
+
+        if "labelfont" in kwargs:
+            obj.SetLabelFont(kwargs["labelfont"]) 
+        
+        if "labeloffset" in kwargs:
+            obj.SetLabelOffset(kwargs["labeloffset"])
+        
+        if "labelsize" in kwargs:
+            obj.SetLabelSize(kwargs["labelsize"])
+
+        if "titleoffset" in kwargs:
+            obj.SetTitleOffset(kwargs["titleoffset"])
+            
+        if "titlesize" in kwargs:
+            obj.SetTitleSize(kwargs["titlesize"])
+
+        if "titlecolor" in kwargs:
+            obj.SetTitleColor(get_color_code(kwargs["titlecolor"]))
+        
+        if "titlefont" in kwargs:
+            obj.SetTitleFont(kwargs['titlefont'])
+        
 
 def get_color_code(color):
     """Get ROOT colour code from arbitrary input.
